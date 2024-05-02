@@ -21,7 +21,7 @@ public class UserController {
             return "CreateUser";
         }
 
-        @RequestMapping("SaveUser")
+        @RequestMapping("saveUser")
          public String saveUser(@ModelAttribute("userVue") User userController) {
 
            User usersave = userService.saveUser(userController);
@@ -42,7 +42,17 @@ public class UserController {
             return usersList(modelMap);
 
         }
-
+        @RequestMapping("/editUser")
+        public String editUser(@RequestParam("id") Long id, ModelMap modelMap){
+           User userController = userService.getUserById(id);
+           modelMap.addAttribute("userView", userController);
+         return "EditUser";
+        }
+        @RequestMapping("/updateUser")
+        public String updateUser(@ModelAttribute("userVue") User userController){
+            userService.updateUser(userController);
+            return createUser();
+        }
         }
 
 
