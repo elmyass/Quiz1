@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customers List</title>
+    <title>Users List</title>
 </head>
 <body>
 <header>
@@ -31,7 +31,7 @@
             <div class="collapse navbar-collapse" id="navbarExample01">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item active">
-                        <a class="nav-link" href="createCustomer">Create Customer</a>
+                        <a class="nav-link" href="createUser">Create User</a>
                     </li>
                 </ul>
             </div>
@@ -59,8 +59,8 @@
         <c:forEach items="${usersVue}" var="user">
             <tr>
                 <td>${user.id}</td>
-                <td>${user.firstname}</td>
-                <td>${user.lastname}</td>
+                <td>${user.firstName}</td>
+                <td>${user.lastName}</td>
                 <td>${user.email}</td>
                 <td>
                     <a class="btn bg-danger"

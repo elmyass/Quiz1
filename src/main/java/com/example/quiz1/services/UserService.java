@@ -1,6 +1,7 @@
 package com.example.quiz1.services;
 
 import com.example.quiz1.entities.User;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,5 +14,6 @@ public interface UserService {
    void deleteAllUsers();
    User getUserById(Long id);
    List<User> getAllUsers();
+   Page<User> getAllUsersByPage(int page, int size);
 
 }

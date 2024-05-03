@@ -3,6 +3,9 @@ import com.example.quiz1.entities.User;
 import com.example.quiz1.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,5 +47,10 @@ public class UserServiceempl implements UserService {
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public Page<User> getAllUsersByPage(int page, int size) {
+        return userRepository.findAll(PageRequest.of(page, size));
     }
 }

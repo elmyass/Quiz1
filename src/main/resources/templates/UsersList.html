@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html">
+<head>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.3.3/css/bootstrap.min.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users List</title>
+</head>
+<body>
+<div layout:fragment="content">
+<main class="container mt-5">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">FIRST NAME</th>
+            <th scope="col">LAST NAME</th>
+            <th scope="col">EMAIL</th>
+        </tr>
+        </thead>
+        <tbody>
+
+            <tr th:each="user:${users.content}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.firstName}"></td>
+                <td th:text="${user.lastName}"></td>
+                <td th:text="${user.email}"></td>
+                <td>
+                    <a
+                            onclick="return confirm('Are you sure you wanna delete this user?')"
+                            th:href="@{deleteUser(id=${user.id})}">
+                        Delete
+                    </a>
+
+                    <a
+                       th:href="@{editUser(id=${user.id})}">
+
+                        Edit
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+     <ul class="nav nav-pills">
+      <li th:each="page,status:${pages}">
+       <a
+               th:class="${status.index==currentPage?'btn btn-primary':'btn'}"
+               th:href="@{usersList(page=${status.index}, size=${size})}"
+               th:text="${status.index}"
+       ></a>
+      </li>
+     </ul>
+</main>
+
+</div>
+</body>
+</html>
+
