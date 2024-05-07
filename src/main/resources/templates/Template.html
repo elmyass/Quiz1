@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
 <head>
     <meta charset="UTF-8">
     <title>User Management</title>
@@ -15,9 +17,10 @@
             <a class="nav-link" th:href="@{usersList}">Home</a>
         </li>
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Users</a>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" th:text="${#authentication.name}">[Users]</a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" th:href="@{createUser}">New</a></li>
+                <li th:if="${#authorization.expression('hasAnyRole(''ADMIN'', ''PROF'')')}">
+                    <a class="dropdown-item" th:href="@{createUser}">New</a></li>
                 <li><a class="dropdown-item" th:href="@{usersList}">List</a></li>
             </ul>
         </li>
@@ -26,8 +29,12 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">[username]</a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">login</a></li>
-               <li><a class="dropdown-item" href="#">logout</a></li>
+                <li><a sec:authorize="!isAuthenticated()" class="dropdown-item" href="#">login</a></li>
+                <form method="post" th:action="@{/logout}">
+                    <li><button sec:authorize="isAuthenticated()"  class="dropdown-item" type="submit">logout</button></li>
+                </form>
+
+
             </ul>
         </li>
     </ul>
