@@ -3,6 +3,7 @@ import com.example.quiz1.entities.User;
 import com.example.quiz1.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
@@ -13,6 +14,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class UserServiceempl implements UserService {
+    @Autowired
     private UserRepository userRepository;
     @Override
     public User saveUser(User user) {

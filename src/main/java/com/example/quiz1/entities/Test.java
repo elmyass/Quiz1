@@ -19,7 +19,8 @@ public class Test {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
     private Long titre;
-    public String description;
+    @OneToMany
+    private List<Question> questions;
     @OneToMany(mappedBy = "test" , fetch = FetchType.LAZY)
     private List<Detail> details = new ArrayList<>();
     @OneToMany(mappedBy = "test" , fetch = FetchType.LAZY)

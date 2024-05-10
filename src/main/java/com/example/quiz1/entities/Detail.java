@@ -17,6 +17,7 @@ public class Detail {
     private Long id;
     private String question;
     private String reponse;
+    private String reponseCorrecte;
     @ManyToOne
     private Test test;
 }
