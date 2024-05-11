@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html">
+<head>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.3.3/css/bootstrap.min.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test List</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <main class="container mt-5">
+        <h1>Test List</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="test : ${tests}">
+                <td th:text="${test.id}"></td>
+                <td th:text="${test.titre}"></td>
+                <td>
+                    <a th:href="@{/testDetails/{id}(id=${test.id})}" class="btn btn-primary">Details</a>
+                    <a th:href="@{/editTest/{id}(id=${test.id})}" class="btn btn-secondary">Edit</a>
+                    <a th:href="@{/deleteTest/{id}(id=${test.id})}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </main>
+</div>
+</body>
+</html>

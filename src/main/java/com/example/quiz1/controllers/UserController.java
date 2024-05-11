@@ -31,6 +31,7 @@ public class UserController {
            User saveUser = userService.saveUser(user);
            return "CreateUser";
         }
+
         @RequestMapping("/usersList")
          public String usersList(ModelMap modelMap,
                                  @RequestParam(name = "page", defaultValue = "0") int page,
