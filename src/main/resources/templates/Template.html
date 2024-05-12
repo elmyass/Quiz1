@@ -16,12 +16,19 @@
         <li class="nav-item">
             <a class="nav-link" th:href="@{usersList}">Home</a>
         </li>
+        <li class="nav-item">
+
+        </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" th:text="${#authentication.name}">[Users]</a>
             <ul class="dropdown-menu">
-                <li th:if="${#authorization.expression('hasAnyRole(''ADMIN'', ''PROF'')')}">
-                    <a class="dropdown-item" th:href="@{createUser}">New</a></li>
-                <li><a class="dropdown-item" th:href="@{usersList}">List</a></li>
+                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                    <a class="dropdown-item" th:href="@{createUser}">New Student</a></li>
+                <li><a class="dropdown-item" th:href="@{usersList}">List students</a></li>
+                <li th:if="${#authorization.expression('hasRole(''PROF'')')}">
+                    <a class="dropdown-item" th:href="@{createTest}">New Test</a></li>
+                <li><a class="dropdown-item" th:href="@{testsList}">List Test</a></li>
+
             </ul>
         </li>
     </ul>

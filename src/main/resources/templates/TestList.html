@@ -22,17 +22,32 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="test : ${tests}">
-                <td th:text="${test.id}"></td>
-                <td th:text="${test.titre}"></td>
+            <tr th:each="tests : ${test}">
+                <td th:text="${tests.id}"></td>
+                <td th:text="${tests.titre}"></td>
+                <td th:if="${#authorization.expression('hasRole(''PROF'')')}"></td>
                 <td>
-                    <a th:href="@{/testDetails/{id}(id=${test.id})}" class="btn btn-primary">Details</a>
-                    <a th:href="@{/editTest/{id}(id=${test.id})}" class="btn btn-secondary">Edit</a>
-                    <a th:href="@{/deleteTest/{id}(id=${test.id})}" class="btn btn-danger">Delete</a>
+                    <a th:href="@{/createQuestion}" class="btn btn-primary">createQuestion</a>
+                    <a th:href="@{/editTest/{id}(id=${tests.id})}" class="btn btn-secondary">Edit</a>
+                    <a
+                        onclick="return confirm('Are you sure you wanna delete this user?')"
+                        th:href="@{/deleteTest/{id}(id=${tests.id})}" class="btn btn-danger">
+                        Delete</a>
+                <td th:if="${#authorization.expression('hasRole(''PROF'')')}">
+
                 </td>
             </tr>
             </tbody>
         </table>
+        <ul class="nav nav-pills">
+            <li th:each="page,status:${pages}">
+                <a
+                        th:class="${status.index==currentPage?'btn btn-primary':'btn'}"
+                        th:href="@{testsList(page=${status.index}, size=${size})}"
+                        th:text="${status.index}"
+                ></a>
+            </li>
+        </ul>
 
     </main>
 </div>

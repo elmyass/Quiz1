@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.3.3/css/bootstrap.min.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des questions</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <main class="container mt-5">
+        <h1>Liste des questions</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">questionTitle</th>
+                <th scope="col">option1</th>
+                <th scope="col">option2</th>
+                <th scope="col">option3</th>
+                <th scope="col">rightAnswer</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="question : ${existingQuestions}">
+                <td th:text="${question.id}"></td>
+                <td th:text="${question.questionTitle}"></td>
+                <td th:text="${question.option1}"></td>
+                <td th:text="${question.option2}"></td>
+                <td th:text="${question.option3}"></td>
+                <td th:text="${question.rightAnswer}"></td>
+
+                <td>
+                    <ul>
+                        <li th:each="option : ${question.option1}" th:text="${option1}"></li>
+                        <li th:each="option : ${question.option2}" th:text="${option2}"></li>
+                        <li th:each="option : ${question.option3}" th:text="${option3}"></li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <ul class="nav nav-pills">
+            <li th:each="page,status:${pages}">
+                <a
+                        th:class="${status.index==currentPage?'btn btn-primary':'btn'}"
+                        th:href="@{questionsList(page=${status.index}, size=${size})}"
+                        th:text="${status.index}"
+                ></a>
+            </li>
+        </ul>
+    </main>
+</div>
+</body>
+</html>

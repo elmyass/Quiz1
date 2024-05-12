@@ -1,5 +1,6 @@
 package com.example.quiz1.controllers;
 
+//import ch.qos.logback.core.model.Model;
 import com.example.quiz1.entities.Test;
 import com.example.quiz1.entities.Question;
 import com.example.quiz1.services.TestService;
@@ -8,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -24,39 +26,26 @@ public class TestController {
     private QuestionService questionService;
 
     @GetMapping("/createTest")
-    public String createTest() {
+    public String createTest(Model model) {
+    model.addAttribute("test", new Test());
 
         return "CreateTest"; // Retourne la vue pour créer un test
     }
 
     @PostMapping("/saveTest")
-    public String saveTest(@ModelAttribute("test") @Valid Test test, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "CreateTest"; // Retourne à la page de création de test avec les erreurs
-        }
+    public String saveTest( Test test, BindingResult bindingResult) {
 
-        // Récupérer les questions associées au test soumis
-        List<Question> questions = test.getQuestions();
-        if (questions != null) {
-            // Lier chaque question au test
-            for (Question question : questions) {
-                question.setTest(test);
-            }
-        }
-
-        // Sauvegarder le test avec les questions associées
-        testService.saveTest(test);
-
-        return "redirect:/CreateTest"; // Redirige vers la page de création de test après l'enregistrement
+            testService.saveTest(test);
+        return "redirect:/createQuestion"; // Redirige vers la page de création de test après l'enregistrement
     }
 
     @GetMapping("/testsList")
     public String testsList(ModelMap modelMap,
                             @RequestParam(name = "page", defaultValue = "0") int page,
-                            @RequestParam(name = "size", defaultValue = "10") int size) {
+                            @RequestParam(name = "size", defaultValue = "4") int size) {
 
         Page<Test> tests = testService.getAllTestsByPage(page, size);
-        modelMap.addAttribute("tests", tests);
+        modelMap.addAttribute("test", tests);
         modelMap.addAttribute("currentPage", page);
         modelMap.addAttribute("pages", new int[tests.getTotalPages()]);
         return "TestList"; // Retourne la vue affichant la liste des tests
@@ -65,7 +54,7 @@ public class TestController {
     @GetMapping("/deleteTest/{id}")
     public String deleteTest(@PathVariable("id") Long id) {
         testService.deleteTestById(id);
-        return "redirect:/TestList"; // Redirige vers la liste des tests après la suppression
+        return "redirect:/testsList"; // Redirige vers la liste des tests après la suppression
     }
 
     @GetMapping("/editTest/{id}")

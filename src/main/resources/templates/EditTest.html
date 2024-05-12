@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html">
+<head>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.3.3/css/bootstrap.min.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Edition</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <main class="container mt-5">
+        <form th:action="@{updateTest}" method="post">
+            <div class="form-group">
+                <label class="form-label" for="id">Test ID: </label>
+                <input class="form-contol" type="text" id="id" name="id" th:value="${test.id}">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="titre">Test Title : </label>
+                <input class="form-contol"  type="text" id="titre" name="titre" th:value="${test.titre}">
+            </div>
+            <!-- Ajoutez d'autres champs de formulaire pour les propriétés du test si nécessaire -->
+            <div>
+                <input class="form-contol btn btn-primary"  type="submit" value="Update">
+            </div>
+        </form>
+    </main>
+</div>
+</body>
+</html>

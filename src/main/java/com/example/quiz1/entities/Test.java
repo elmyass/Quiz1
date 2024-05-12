@@ -18,7 +18,7 @@ public class Test {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
-    private Long titre;
+    private String titre;
     @OneToMany
     private List<Question> questions;
     @OneToMany(mappedBy = "test" , fetch = FetchType.LAZY)

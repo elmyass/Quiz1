@@ -69,6 +69,11 @@ public class QuestionServiceempl implements QuestionService {
     }
 
     @Override
+    public List<Question> getAllQuestionsWithOptions() {
+        return null;
+    }
+
+    @Override
     public Page<Question> getAllQuestionsByPage(int page, int size) {
         return null;
     }

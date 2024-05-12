@@ -25,7 +25,7 @@ public class EtudiantController {
     public String showTestPage(@PathVariable Long testId, ModelMap modelMap) {
         Test test = testService.getTestById(testId).orElseThrow(() -> new RuntimeException("Test not found"));
         modelMap.addAttribute("test", test);
-        return "passer-le-test"; // Template pour afficher le test pour l'étudiant
+        return "questionsList"; // Template pour afficher le test pour l'étudiant
     }
 
     // Valider les réponses soumises par l'étudiant

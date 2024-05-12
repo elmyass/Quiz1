@@ -21,6 +21,8 @@ import java.util.List;
         List<Question> getAllQuestionsByCategory(String category);
 
         List<Question> getQuestionsByTestId(Long id);
+
+        List<Question> getAllQuestionsWithOptions();
     }
 
 

@@ -26,7 +26,9 @@ public class SecurityConfig {
                       authCustomizer -> authCustomizer
                               //les droits
                               .requestMatchers("/editUser","/updateUser" ,"deletUser").hasRole("ADMIN")
-                              .requestMatchers("/createUser", "/saveUser").hasAnyRole("ADMIN", "PROF")
+                              .requestMatchers("/createUser", "/saveUser").hasRole("ADMIN")
+                              .requestMatchers("/createTest", "/saveTest", "/editTest").hasRole("PROF")
+                              .requestMatchers("/createQuestion", "/saveQuestion" , "/deleteQuestion").hasRole("PROF")
                               .requestMatchers("/usersList").hasAnyRole("ADMIN", "PROF", "ETUDIANT")
                               .anyRequest().authenticated()
               )

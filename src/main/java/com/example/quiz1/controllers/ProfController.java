@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Controller
-@AllArgsConstructor
+
 public class ProfController {
     @Autowired
     private TestService testService;
