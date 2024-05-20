@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html">
+<head>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.3.3/css/bootstrap.min.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Form</title>
+    <style>
+        body {
+            margin-bottom: 5cm; /* Ajoute 5 centimètres d'espace en bas de la page */
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <main class="container mt-5">
+        <form th:action="@{/saveQuestion}" method="post">
+            <div class="form-group">
+                <label class="form-label" for="test">Select Test:</label>
+                <select class="form-select" id="test" name="test">
+                    <option th:each="test : ${tests}" th:value="${test.id}" th:text="${test.titre}">Test Title</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="question">Question:</label>
+                <input class="form-control" type="text" id="question" name="questionTitle">
+            </div>
+            <div class="form-group">
+                <label>Options:</label><br>
+                <input type="text" name="option1" /><br>
+                <input type="text" name="option2" /><br>
+                <input type="text" name="option3" /><br>
+
+            </div>
+            <div class="form-group">
+                <label>Correct Answer:</label><br>
+                <input type="radio" name="correctAnswer" value="1" /> Option 1<br>
+                <input type="radio" name="correctAnswer" value="2" /> Option 2<br>
+                <input type="radio" name="correctAnswer" value="3" /> Option 3<br>
+
+            </div>
+            <!-- Bouton "Save" en bas de la page -->
+            <div class="form-group">
+                <input class="form-control btn btn-primary" type="submit" value="Save">
+            </div>
+        </form>
+    </main>
+</div>
+</body>
+</html>

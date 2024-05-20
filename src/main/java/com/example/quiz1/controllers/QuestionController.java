@@ -69,13 +69,5 @@ public class QuestionController {
         return "EditQuestion";
     }
 
-    @RequestMapping("/updateQuestion")
-    public String updateQuestion(@Valid Question question, BindingResult result) {
-        if (result.hasErrors()) {
-            // Gestion des erreurs de validation
-            return "EditQuestion";
-        }
-        questionService.updateQuestion(question);
-        return "redirect:/questionsList";
-    }
+
 }

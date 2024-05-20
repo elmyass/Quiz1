@@ -25,7 +25,7 @@ public class EtudiantController {
     public String showTestPage(@PathVariable Long testId, ModelMap modelMap) {
         Test test = testService.getTestById(testId).orElseThrow(() -> new RuntimeException("Test not found"));
         modelMap.addAttribute("test", test);
-        return "questionsList"; // Template pour afficher le test pour l'étudiant
+        return "QuestionList"; // Template pour afficher le test pour l'étudiant
     }
 
     // Valider les réponses soumises par l'étudiant
@@ -44,7 +44,7 @@ public class EtudiantController {
             }
         }
 
-        // Enregistrer le score dans la session ou dans la base de données
+        // Enregistrer le score dans la base de données
         // Ici, nous le stockons simplement dans les attributs de redirection pour l'afficher sur la page suivante
         redirectAttributes.addFlashAttribute("score", score);
 

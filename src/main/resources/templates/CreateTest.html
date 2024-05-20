@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html">
+<head>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.3.3/css/bootstrap.min.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Form</title>
+    <style>
+        body {
+            margin-bottom: 5cm; /* Ajoute 5 centimètres d'espace en bas de la page */
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <main class="container mt-5">
+        <form th:action="@{saveTest}" method="post">
+            <div class="form-group">
+                <label class="form-label" for="testTitle">Test Title:</label>
+                <input class="form-control" type="text" id="testTitle" name="titre">
+            </div>
+
+            <!-- Bouton "Save" en bas de la page -->
+            <div class="form-group">
+                <input class="form-control btn btn-primary" type="submit" value="Save">
+            </div>
+        </form>
+    </main>
+</div>

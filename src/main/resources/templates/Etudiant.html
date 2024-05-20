@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tests</title>
+</head>
+
+<body>
+<div class="container">
+  <h1>Liste des Tests</h1>
+  <ul>
+    <li th:each="test : ${tests}">
+      <span th:text="${test.titre}"></span>
+      <form th:action="@{/passer-le-test/{testId}(testId=${test.id})}" method="get">
+        <button type="submit">Passer</button>
+      </form>
+    </li>
+  </ul>
+</div>
+</body>
+
+</html>
